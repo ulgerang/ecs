@@ -1,15 +1,15 @@
 package ecs
 
-//SimpleContainer is very simple container using slice.
-//time complexity of add is O(1) when len < capacity
-//time complexity of remove using index is O(1)
+// SimpleContainer is very simple container using slice.
+// time complexity of add is O(1) when len < capacity
+// time complexity of remove using index is O(1)
 type SimpleContainer struct {
 	items    []interface{}
 	cnt      int
 	capacity int
 }
 
-//NewSimpleContainer make instance of SimpleContainer
+// NewSimpleContainer make instance of SimpleContainer
 func NewSimpleContainer(capa int) *SimpleContainer {
 
 	return &SimpleContainer{
@@ -20,7 +20,7 @@ func NewSimpleContainer(capa int) *SimpleContainer {
 
 }
 
-//Add add item
+// Add add item
 func (s *SimpleContainer) Add(i interface{}) int {
 
 	rIdx := s.cnt
@@ -36,15 +36,18 @@ func (s *SimpleContainer) Add(i interface{}) int {
 	return rIdx
 }
 
-//RemoveIdx remove item by index
+// RemoveIdx remove item by index
 func (s *SimpleContainer) RemoveIdx(idx int) {
+	if s.cnt == 0 {
+		return
+	}
 
 	s.cnt--
 	s.items[idx] = s.items[s.cnt]
 	s.items[s.cnt] = nil
 }
 
-//Each iterate items with index and item
+// Each iterate items with index and item
 func (s *SimpleContainer) Each(f func(int, interface{})) {
 
 	for i := s.cnt - 1; i >= 0; i-- {
